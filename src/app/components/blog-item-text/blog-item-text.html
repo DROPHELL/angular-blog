@@ -1,0 +1,11 @@
+@if (text) {
+  <p class="card-text">
+    {{ text | summary:35 }}
+  </p>
+
+  <a
+    class="btn btn-primary mt-2"
+    [routerLink]="['/blog/detail', id]">
+    Więcej
+  </a>
+}

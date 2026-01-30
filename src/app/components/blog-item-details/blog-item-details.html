@@ -1,0 +1,43 @@
+@if (!loading && post) {
+
+  <div class="container mt-4">
+    <div class="card shadow-sm">
+
+      @if (post.image) {
+        <img
+          [src]="post.image"
+          class="card-img-top"
+          alt="Post image">
+      }
+
+      <div class="card-body">
+        <h2 class="card-title">{{ post.title }}</h2>
+
+        <p class="text-muted">
+          Autor: {{ post.author }} |
+          {{ post.createdAt | date:'dd.MM.yyyy HH:mm' }}
+        </p>
+
+        <app-rating [postId]="post.id"></app-rating>
+
+        <hr>
+
+        <p class="card-text">
+          {{ post.text }}
+        </p>
+
+        <hr>
+
+      
+        <app-comments [postId]="post.id"></app-comments>
+
+      </div>
+    </div>
+  </div>
+}
+
+@if (loading) {
+  <div class="text-center mt-5">
+    <div class="spinner-border"></div>
+  </div>
+}

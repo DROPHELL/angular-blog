@@ -1,0 +1,50 @@
+@if (images.length === 0) {
+  <p class="text-muted text-center">
+    Brak obrazów do wyświetlenia.
+  </p>
+} @else {
+  <div class="row g-3">
+    @for (imageItem of images; track imageItem.id) {
+      <div class="col-6 col-md-4 col-lg-3">
+        <div
+          class="card shadow-sm gallery-item"
+          (click)="openLightbox(imageItem)">
+          <img
+            [src]="imageItem.imageUrl"
+            class="img-fluid rounded gallery-thumbnail"
+            alt="{{ imageItem.title }}">
+        </div>
+      </div>
+    }
+  </div>
+}
+
+@if (selectedImage) {
+  <div class="modal d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ selectedImage.title }}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="closeLightbox()">
+          </button>
+        </div>
+
+        <div class="modal-body text-center">
+          <img
+            [src]="selectedImage.imageUrl"
+            class="img-fluid"
+            alt="{{ selectedImage.title }}">
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal-backdrop fade show"
+      (click)="closeLightbox()">
+    </div>
+  </div>
+}

@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <h2>Logowanie</h2>
+
+  <form autocomplete="off" (ngSubmit)="signIn()">
+    <div class="mb-3">
+      <label>Login</label>
+      <input
+        [(ngModel)]="credentials.login"
+        name="login"
+        class="form-control"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label>Hasło</label>
+      <input
+        [(ngModel)]="credentials.password"
+        name="password"
+        type="password"
+        class="form-control"
+        required>
+    </div>
+
+    @if (loginError) {
+      <div class="alert alert-danger">
+        Nieprawidłowy login lub hasło
+      </div>
+    }
+
+    <button
+      type="submit"
+      class="btn btn-primary">
+      Zaloguj
+    </button>
+  </form>
+</div>

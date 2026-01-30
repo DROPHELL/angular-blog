@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <h2>Profil użytkownika</h2>
+
+  @if (user) {
+
+    @if (!isEditing) {
+      <p><strong>Imię i nazwisko:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Data rejestracji:</strong> {{ user.createdAt | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Posty opublikowane:</strong> {{ user.postsCount }}</p>
+
+      <button class="btn btn-primary" (click)="editProfile()">
+        Edytuj profil
+      </button>
+    }
+
+    @if (isEditing) {
+      <form (ngSubmit)="updateProfile()" class="mb-4">
+        <div class="mb-3">
+          <label>Imię i nazwisko</label>
+          <input class="form-control" [(ngModel)]="newName" name="name" required>
+        </div>
+
+        <div class="mb-3">
+          <label>Email</label>
+          <input class="form-control" [(ngModel)]="newEmail" name="email" required>
+        </div>
+
+        <button type="submit" class="btn btn-success me-2">
+          Zapisz zmiany
+        </button>
+
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+          Anuluj
+        </button>
+      </form>
+    }
+
+    <hr>
+
+    <h4>Moje posty</h4>
+
+    @if (userPosts.length === 0) {
+      <p>Brak opublikowanych postów.</p>
+    }
+
+    <div class="row">
+      @for (post of userPosts; track post.id) {
+        <div class="col-md-4 mb-3">
+          <blog-item
+            [id]="post.id"
+            [title]="post.title"
+            [text]="post.text"
+            [image]="post.image"
+            [author]="post.author">
+          </blog-item>
+        </div>
+      }
+    </div>
+
+  }
+</div>
+Ф

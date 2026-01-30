@@ -1,0 +1,65 @@
+<div class="card shadow-sm">
+  <blog-item-image
+    [image]="image"
+    class="card-img-top">
+  </blog-item-image>
+
+  <div class="card-body">
+
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <h5 class="card-title mb-0">{{ title }}</h5>
+
+      <div class="d-flex align-items-center gap-2">
+       
+        <i
+          class="fa"
+          [ngClass]="{
+            'fa-heart': likedByUser,
+            'fa-heart-o': !likedByUser
+          }"
+          (click)="toggleLike()"
+          style="cursor: pointer; color: red; font-size: 20px;">
+        </i>
+
+        <span class="text-muted small">
+          {{ likesCount }}
+        </span>
+
+      
+        <i
+          class="fa"
+          [ngClass]="{
+            'fa-star': isFavorite(),
+            'fa-star-o': !isFavorite()
+          }"
+          (click)="toggleFavorite()"
+          style="cursor: pointer; color: goldenrod; font-size: 18px;">
+        </i>
+      </div>
+    </div>
+
+    <app-rating [postId]="id"></app-rating>
+
+    <blog-item-text
+      [text]="text"
+      [id]="id">
+    </blog-item-text>
+
+    @if (isAuthor()) {
+      <div class="d-flex gap-2 mt-2">
+        <a
+          class="btn btn-sm btn-warning"
+          [routerLink]="['/blog/edit', id]">
+          Edytuj
+        </a>
+
+        <button
+          class="btn btn-sm btn-danger"
+          (click)="deletePost()">
+          Usuń
+        </button>
+      </div>
+    }
+
+  </div>
+</div>

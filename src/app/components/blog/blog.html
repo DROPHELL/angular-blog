@@ -1,0 +1,35 @@
+@if (loading) {
+  <div class="text-center mt-4">
+    <div class="spinner-border"></div>
+  </div>
+}
+
+@if (!loading && items.length > 0) {
+  <div class="row">
+    @for (item of items; track item.id) {
+      <div class="col-md-4 mb-3">
+        <blog-item
+          [id]="item.id"
+          [title]="item.title"
+          [text]="item.text"
+          [image]="item.image"
+          [author]="item.author"
+          (deleted)="removeFromList($event)">
+        </blog-item>
+      </div>
+    }
+  </div>
+
+  <app-pagination
+    [totalItems]="totalItems"
+    [itemsPerPage]="itemsPerPage"
+    [currentPage]="currentPage"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
+}
+
+@if (!loading && items.length === 0) {
+  <div class="alert alert-warning mt-3">
+    Brak postów do wyświetlenia
+  </div>
+}

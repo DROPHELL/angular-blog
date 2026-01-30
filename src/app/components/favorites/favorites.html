@@ -1,0 +1,17 @@
+<h2 class="mb-4">Ulubione posty</h2>
+
+@if (favoritesPosts.length === 0) {
+  <p class="text-muted">
+    Brak ulubionych postów.
+  </p>
+} @else {
+  @for (item of favoritesPosts; track item.id) {
+    <blog-item
+      [id]="item.id"
+      [title]="item.title"
+      [text]="item.text"
+      [image]="item.image"
+      [author]="item.author">
+    </blog-item>
+  }
+}
